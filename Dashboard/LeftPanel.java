@@ -81,7 +81,7 @@ public class LeftPanel extends Panel {
   // create a new accordion
   // add g1, g2, and g3 to the accordion.
   accordion = cp5.addAccordion("acc")
-                 .setPosition(40,40)
+                 .setPosition(0,0)
                  .setWidth(200)
                  .addItem(g1)
                  .addItem(g2)
