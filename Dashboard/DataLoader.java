@@ -10,6 +10,7 @@ public class DataLoader {
   private static final String COUNTRY_NAME_PATH = BASE_FOLDER + "/" +"country-by-name.json";
   private static final String COUNTRY_ABBREVIATION_PATH = BASE_FOLDER + "/" +"country-by-abbreviation.json";
   private static final String COUNTRY_AVERAGE_MALE_HEIGHT_PATH = BASE_FOLDER + "/" +"country-by-avg-male-height.json";
+  private static final String COUNTRY_BARCODE_PATH = BASE_FOLDER + "/" +"country-by-barcode-prefix.json";
  
  public static Map<String, Country> loadCountryMap() throws Exception {
    Map<String, Country> countryMap = new HashMap<>();
@@ -39,29 +40,45 @@ public static void loadAbbreviation(Map<String, Country> countries) throws Excep
     //System.out.println(country);
     }
     else {
-      System.out.println("could not find country: " + name);
+      System.out.println("country not available for abbreviation: " + name);
   }}
  }
 
 public static void loadAverageHeight(Map<String, Country> countries) throws Exception {
    JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_AVERAGE_MALE_HEIGHT_PATH));
    
-   
    for(int i = 0; i < jsonArray.size(); i++){
     JSONObject jsonItem = jsonArray.getJSONObject(i);
     String name = (String) jsonItem.get("country");
     Country country = countries.get(name);
-    System.out.println(country);
+    //System.out.println(country);
     if(country!=null) {
     country.setHeight((Double) jsonItem.get("height"));
     //System.out.println(country);
     }
     else {
-      System.out.println("could not find country to set average height: " + name);
-  }}
+      System.out.println("country not available for average height: " + name);
+    }
+  }
  }
 
-  private static String readFile(String fileName) {
+public static void loadBarcode(Map<String, Country> countries) throws Exception {
+   JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_BARCODE_PATH));
+   
+   for(int i = 0; i < jsonArray.size(); i++){
+    JSONObject jsonItem = jsonArray.getJSONObject(i);
+    String name = (String) jsonItem.get("country");
+    Country country = countries.get(name);
+    //System.out.println(country);
+    if(country!=null) {
+      country.setBarCode((String) jsonItem.get("barcode"));
+    }
+    else {
+      System.out.println("country not available for bar code: " + name);
+    }
+  }
+ }
+ private static String readFile(String fileName) {
   StringBuilder stringBuilder= new StringBuilder();
   try {
     FileReader fr = new FileReader(fileName);
