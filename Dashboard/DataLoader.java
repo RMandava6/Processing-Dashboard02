@@ -12,6 +12,8 @@ public class DataLoader {
   private static final String COUNTRY_AVERAGE_MALE_HEIGHT_PATH = BASE_FOLDER + "/" +"country-by-avg-male-height.json";
   private static final String COUNTRY_BARCODE_PATH = BASE_FOLDER + "/" +"country-by-barcode-prefix.json";
   private static final String COUNTRY_CALLING_CODE_PATH = BASE_FOLDER + "/" + "country-by-calling-code.json";
+  private static final String COUNTRY_CAPITAL_CITY_PATH = BASE_FOLDER + "/" + "country-by-capital-city.json";
+ 
  
  public static Map<String, Country> loadCountryMap() throws Exception {
    Map<String, Country> countryMap = new HashMap<>();
@@ -84,7 +86,7 @@ public static void loadBarcode(Map<String, Country> countries) throws Exception 
    String callingCode = readFile(COUNTRY_CALLING_CODE_PATH);
    //System.out.println(callingCode);
    JSONArray jsonArray = JSONArray.parse(callingCode);
-   System.out.println(jsonArray);
+   //System.out.println(jsonArray);
    for(int i = 0; i < jsonArray.size(); i++){
     JSONObject jsonItem = jsonArray.getJSONObject(i);
     String name = (String) jsonItem.get("country");
@@ -92,10 +94,27 @@ public static void loadBarcode(Map<String, Country> countries) throws Exception 
     Country country = countries.get(name);
     //System.out.println(country);
     if(country!=null) {
-      country.setBarCode((String) jsonItem.get("calling_code"));
+      country.setCalling_code((String) jsonItem.get("calling_code"));
     }
     else {
       System.out.println("country not available for calling_code: " + name);
+    }
+  }
+ }
+ 
+ public static void loadCapitalCity(Map<String, Country> countries) throws Exception {
+   
+   JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_CAPITAL_CITY_PATH));
+   for(int i = 0; i < jsonArray.size(); i++){
+    JSONObject jsonItem = jsonArray.getJSONObject(i);
+    String name = (String) jsonItem.get("country");
+       //System.out.println(name);
+    Country country = countries.get(name);
+    if(country!=null && !jsonItem.isNull("city")) {
+        country.setCity((String)jsonItem.get("city"));
+    }
+    else {
+      System.out.println("country not available for capital city: " + name);
     }
   }
  }
