@@ -11,16 +11,19 @@ color c = color(0, 160, 100);
 
 
 void setup() {
+  
   try {
     Map<String, Country> map=DataLoader.loadCountryMap();
     DataLoader.loadAbbreviation(map);
     DataLoader.loadAverageHeight(map);
     DataLoader.loadBarcode(map);
+    DataLoader.loadCallingCode(map);
     CountryService countryService = new CountryService(map);
     List<Country> result = countryService.load("name", false);
-    for (Country country : result) {
-       System.out.println("country = " + country);
-    }
+    //all countries in the result are loaded in reverse order based on "name". The result will start with zimbawe and should end with a country like albany.
+    //for (Country country : result) {
+    //   System.out.println("country = " + country);
+    //}
   }
   catch(Exception e ) {
     System.out.println("exception: " + e);

@@ -11,6 +11,7 @@ public class DataLoader {
   private static final String COUNTRY_ABBREVIATION_PATH = BASE_FOLDER + "/" +"country-by-abbreviation.json";
   private static final String COUNTRY_AVERAGE_MALE_HEIGHT_PATH = BASE_FOLDER + "/" +"country-by-avg-male-height.json";
   private static final String COUNTRY_BARCODE_PATH = BASE_FOLDER + "/" +"country-by-barcode-prefix.json";
+  private static final String COUNTRY_CALLING_CODE_PATH = BASE_FOLDER + "/" + "country-by-calling-code.json";
  
  public static Map<String, Country> loadCountryMap() throws Exception {
    Map<String, Country> countryMap = new HashMap<>();
@@ -78,6 +79,27 @@ public static void loadBarcode(Map<String, Country> countries) throws Exception 
     }
   }
  }
+ 
+ public static void loadCallingCode(Map<String, Country> countries) throws Exception {
+   String callingCode = readFile(COUNTRY_CALLING_CODE_PATH);
+   //System.out.println(callingCode);
+   JSONArray jsonArray = JSONArray.parse(callingCode);
+   System.out.println(jsonArray);
+   for(int i = 0; i < jsonArray.size(); i++){
+    JSONObject jsonItem = jsonArray.getJSONObject(i);
+    String name = (String) jsonItem.get("country");
+       //System.out.println(name);
+    Country country = countries.get(name);
+    //System.out.println(country);
+    if(country!=null) {
+      country.setBarCode((String) jsonItem.get("calling_code"));
+    }
+    else {
+      System.out.println("country not available for calling_code: " + name);
+    }
+  }
+ }
+ 
  private static String readFile(String fileName) {
   StringBuilder stringBuilder= new StringBuilder();
   try {
