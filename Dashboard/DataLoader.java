@@ -6,7 +6,8 @@ import java.io.*;
 
 public class DataLoader {
   
-  private static final String BASE_FOLDER= "/Users/ramin/IdeaProjects/Processing-Dashboard02/Dashboard/Data/json";
+  //private static final String BASE_FOLDER= "/Users/ramin/IdeaProjects/Processing-Dashboard02/Dashboard/Data/json";
+  private static final String BASE_FOLDER= "/Users/ramya/Documents/GitHub/Processing-Dashboard02/Dashboard/Data/json";
   private static final String COUNTRY_NAME_PATH = BASE_FOLDER + "/" +"country-by-name.json";
   private static final String COUNTRY_ABBREVIATION_PATH = BASE_FOLDER + "/" +"country-by-abbreviation.json";
   private static final String COUNTRY_AVERAGE_MALE_HEIGHT_PATH = BASE_FOLDER + "/" +"country-by-avg-male-height.json";
