@@ -13,7 +13,7 @@ public class DataLoader {
   private static final String COUNTRY_BARCODE_PATH = BASE_FOLDER + "/" +"country-by-barcode-prefix.json";
   private static final String COUNTRY_CALLING_CODE_PATH = BASE_FOLDER + "/" + "country-by-calling-code.json";
   private static final String COUNTRY_CAPITAL_CITY_PATH = BASE_FOLDER + "/" + "country-by-capital-city.json";
- 
+  private static final String COUNTRY_LIFE_EXPECTANCY_PATH = BASE_FOLDER + "/" + "country-by-life-expectancy.json";
  
  public static Map<String, Country> loadCountryMap() throws Exception {
    Map<String, Country> countryMap = new HashMap<>();
@@ -115,6 +115,23 @@ public static void loadBarcode(Map<String, Country> countries) throws Exception 
     }
     else {
       System.out.println("country not available for capital city: " + name);
+    }
+  }
+ }
+ 
+ public static void loadLifeExpectancy(Map<String, Country> countries) throws Exception {
+   
+   JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_LIFE_EXPECTANCY_PATH));
+   for(int i = 0; i < jsonArray.size(); i++){
+    JSONObject jsonItem = jsonArray.getJSONObject(i);
+    String name = (String) jsonItem.get("country");
+       //System.out.println(name);
+    Country country = countries.get(name);
+    if(country!=null && !jsonItem.isNull("expectancy")) {
+        country.setExpectancy((Double)jsonItem.get("expectancy"));
+    }
+    else {
+      System.out.println("country not available for Life expectancy: " + name);
     }
   }
  }

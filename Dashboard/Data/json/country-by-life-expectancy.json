@@ -231,7 +231,7 @@
 {"country" : "Virgin Islands", "expectancy" : null},
 {"country" : "British", "expectancy" : 75.4},
 {"country" : "Virgin Islands", "expectancy" : null},
-{"country" : "U.S.", "expectancy" : 78.1},
+{"country" : "United States", "expectancy" : 78.1},
 {"country" : "Vietnam", "expectancy" : 69.3},
 {"country" : "Vanuatu", "expectancy" : 60.6},
 {"country" : "Wallis and Futuna", "expectancy" : null},

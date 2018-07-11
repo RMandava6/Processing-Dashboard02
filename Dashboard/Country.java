@@ -22,7 +22,7 @@ public class Country {
     private String iso;
     private String landlocked;
     private String language;
-    private String expectancy;
+    private Double expectancy;
     private String dish;
     private String symbol;
     private Float density;
@@ -209,11 +209,11 @@ public class Country {
         this.language = language;
     }
 
-    public String getExpectancy() {
+    public Double getExpectancy() {
         return expectancy;
     }
 
-    public void setExpectancy(String expectancy) {
+    public void setExpectancy(Double expectancy) {
         this.expectancy = expectancy;
     }
 
