@@ -2,7 +2,7 @@ public class Country {
 
     private String name;
     private String abbreviation;
-    private Float height;
+    private Double height;
     private String barCode;
     private String calling_code;
     private String city;
@@ -49,11 +49,11 @@ public class Country {
         this.abbreviation = abbreviation;
     }
 
-    public Float getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Float height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
