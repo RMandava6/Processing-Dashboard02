@@ -59,7 +59,7 @@ void setup() {
   //Loading earthquakes csv from the below URL
   earthquakes = loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv");
   
-  pin = loadImage("/Users/ramya/Desktop/Dashboard/Data/PinDrop.jpg");
+  pin = loadImage(DataLoader.BASE_FOLDER+ "/PinDrop.jpg");
   
   //Load latitude and longitude data
   geo = loadStrings("/Users/ramya/Desktop/Dashboard/Data/CountryLatLong.csv");
