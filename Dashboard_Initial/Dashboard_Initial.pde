@@ -62,13 +62,12 @@ void setup() {
   pin = loadImage(DataLoader.BASE_FOLDER+ "/PinDrop.jpg");
   
   //Load latitude and longitude data
-  geo = loadStrings( DataLoader.BASE_FOLDER + "/CountryLatLong.csv");
-}
+  //geo = loadStrings( DataLoader.BASE_FOLDER + "/CountryLatLong.csv");
+}//end of setup
 
 void gui() {
   
   cp5 = new ControlP5(this);
-  
   
   // group number 1, contains scrollable list
   Group g1 = cp5.addGroup("Country List")
@@ -223,31 +222,11 @@ void draw() {
   else if(dropd==1 || radio<5){
     show();
   }//end of else if
-  
-  //switch(radio) {
-  //  case(0):show(geo);
-  //          break;
-  //  case(1):c=color(255,0,0,200);break;
-  //  case(2):c=color(0, 200, 140,200);break;
-  //  case(3):c=color(0, 128, 255,200);break;
-  //  case(4):c=color(50,128);break;
-  //}//end of switch case
-  
-   //if(key =='c' || key =='C'){
-   //  dropd=0;
-   //  shuff=0;
-   // //filter(INVERT);
-   // //setup();
-   //}//end of if
    
 }//end of draw
 
 void show(){
-   List<Country> countries = CountryService.getInstance().load("name", true);
-  //float cx = mercX(clon);
-  //float cy = mercY(clat);
-  //float mag;
-  //String[] strarray  = strar;
+  List<Country> countries = CountryService.getInstance().load("name", true);
   String country;
   
   for (Country aCountry: countries) {
@@ -263,8 +242,9 @@ void show(){
       } else if(x > width / 2) {
         x -= width;
       }
-      
-     if(dropd==1)
+    
+    
+    if(dropd==1)
     {
       country = aCountry.getName();
       if(country.equals(dd))
@@ -274,42 +254,19 @@ void show(){
     }//end of else if dropd==1
     else if(radio<5)
     {
-      Float expectancy = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0)/8;
-      ellipse( x+710, y+255, expectancy, expectancy);
+      switch(radio){
+        case(0):c=color(0,200);
+                Float expectancy = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0)/8;
+                ellipse( x+710, y+255, expectancy, expectancy);
+                break;
+        case(1):c=color(255,0,0,200);break;
+        case(2):c=color(0, 200, 140,200);break;
+        case(3):c=color(0, 128, 255,200);break;
+        case(4):c=color(50,128);break;
+      }//end of switch case
     }//end of else if radio<5
-    }
-    
-    
-    
-    //if(shuff==1)
-    //{
-    //  float mag = float(data[4]);
-    //  mag = pow(10, mag);
-    //  mag = sqrt(mag);
-    //  float magmax = sqrt(pow(10, 10)); //<>//
-    //  float d = map(mag, 0, magmax, 0, 180);
-    //  stroke(255, 0, 255);
-    //  fill(255, 0, 255, 200);
-    //  //ellipse(x+510, y+260, d, d);
-    //  ellipse(x+710, y+255, d, d);
-    //}//end of if shuff==1
-    
-    //else if(dropd==1)
-    //{
-    //  country = data[3].toString();
-    //  if(country.equals(dd))
-    //  {
-    //    image(pin, x+706, y+255, 10,10); //<>//
-    //  }
-    //}//end of else if dropd==1
-    
-    //else if(radio<5)
-    //{
-    //  ellipse( x+710, y+255, 3,3);
-    //}//end of else if radio<5
-  }
-  
-   
+   }//end of if x or y null 
+  }//end of for loop //<>// //<>//
 }//end of show()
 
 void show(String[] strar){
@@ -344,128 +301,3 @@ void show(String[] strar){
       ellipse(x+710, y+255, d, d);
   }//end of for loop    
 }//end of show
-/*
-a list of all methods available for the Accordion Controller
-use ControlP5.printPublicMethodsFor(Accordion.class);
-to print the following list into the console.
-
-You can find further details about class Accordion in the javadoc.
-
-Format:
-ClassName : returnType methodName(parameter type)
-
-
-controlP5.Accordion : Accordion addItem(ControlGroup) 
-controlP5.Accordion : Accordion close() 
-controlP5.Accordion : Accordion open() 
-controlP5.Accordion : Accordion remove(ControllerInterface) 
-controlP5.Accordion : Accordion removeItem(ControlGroup) 
-controlP5.Accordion : Accordion setCollapseMode(int) 
-controlP5.Accordion : Accordion setItemHeight(int) 
-controlP5.Accordion : Accordion setMinItemHeight(int) 
-controlP5.Accordion : Accordion setWidth(int) 
-controlP5.Accordion : Accordion updateItems() 
-controlP5.Accordion : int getItemHeight() 
-controlP5.Accordion : int getMinItemHeight() 
-controlP5.ControlGroup : Accordion activateEvent(boolean) 
-controlP5.ControlGroup : Accordion addListener(ControlListener) 
-controlP5.ControlGroup : Accordion removeListener(ControlListener) 
-controlP5.ControlGroup : Accordion setBackgroundColor(int) 
-controlP5.ControlGroup : Accordion setBackgroundHeight(int) 
-controlP5.ControlGroup : Accordion setBarHeight(int) 
-controlP5.ControlGroup : Accordion setSize(int, int) 
-controlP5.ControlGroup : Accordion updateInternalEvents(PApplet) 
-controlP5.ControlGroup : String getInfo() 
-controlP5.ControlGroup : String toString() 
-controlP5.ControlGroup : int getBackgroundHeight() 
-controlP5.ControlGroup : int getBarHeight() 
-controlP5.ControlGroup : int listenerSize() 
-controlP5.ControllerGroup : Accordion add(ControllerInterface) 
-controlP5.ControllerGroup : Accordion addListener(ControlListener) 
-controlP5.ControllerGroup : Accordion bringToFront() 
-controlP5.ControllerGroup : Accordion bringToFront(ControllerInterface) 
-controlP5.ControllerGroup : Accordion close() 
-controlP5.ControllerGroup : Accordion disableCollapse() 
-controlP5.ControllerGroup : Accordion enableCollapse() 
-controlP5.ControllerGroup : Accordion hide() 
-controlP5.ControllerGroup : Accordion hideArrow() 
-controlP5.ControllerGroup : Accordion hideBar() 
-controlP5.ControllerGroup : Accordion moveTo(ControlWindow) 
-controlP5.ControllerGroup : Accordion moveTo(PApplet) 
-controlP5.ControllerGroup : Accordion open() 
-controlP5.ControllerGroup : Accordion registerProperty(String) 
-controlP5.ControllerGroup : Accordion registerProperty(String, String) 
-controlP5.ControllerGroup : Accordion remove(CDrawable) 
-controlP5.ControllerGroup : Accordion remove(ControllerInterface) 
-controlP5.ControllerGroup : Accordion removeCanvas(Canvas) 
-controlP5.ControllerGroup : Accordion removeListener(ControlListener) 
-controlP5.ControllerGroup : Accordion removeProperty(String) 
-controlP5.ControllerGroup : Accordion removeProperty(String, String) 
-controlP5.ControllerGroup : Accordion setAddress(String) 
-controlP5.ControllerGroup : Accordion setArrayValue(float[]) 
-controlP5.ControllerGroup : Accordion setArrayValue(int, float) 
-controlP5.ControllerGroup : Accordion setCaptionLabel(String) 
-controlP5.ControllerGroup : Accordion setColor(CColor) 
-controlP5.ControllerGroup : Accordion setColorActive(int) 
-controlP5.ControllerGroup : Accordion setColorBackground(int) 
-controlP5.ControllerGroup : Accordion setColorForeground(int) 
-controlP5.ControllerGroup : Accordion setColorLabel(int) 
-controlP5.ControllerGroup : Accordion setColorValue(int) 
-controlP5.ControllerGroup : Accordion setHeight(int) 
-controlP5.ControllerGroup : Accordion setId(int) 
-controlP5.ControllerGroup : Accordion setLabel(String) 
-controlP5.ControllerGroup : Accordion setMouseOver(boolean) 
-controlP5.ControllerGroup : Accordion setMoveable(boolean) 
-controlP5.ControllerGroup : Accordion setOpen(boolean) 
-controlP5.ControllerGroup : Accordion setPosition(float, float) 
-controlP5.ControllerGroup : Accordion setPosition(float[]) 
-controlP5.ControllerGroup : Accordion setSize(int, int) 
-controlP5.ControllerGroup : Accordion setStringValue(String) 
-controlP5.ControllerGroup : Accordion setTitle(String) 
-controlP5.ControllerGroup : Accordion setUpdate(boolean) 
-controlP5.ControllerGroup : Accordion setValue(float) 
-controlP5.ControllerGroup : Accordion setVisible(boolean) 
-controlP5.ControllerGroup : Accordion setWidth(int) 
-controlP5.ControllerGroup : Accordion show() 
-controlP5.ControllerGroup : Accordion showArrow() 
-controlP5.ControllerGroup : Accordion showBar() 
-controlP5.ControllerGroup : Accordion update() 
-controlP5.ControllerGroup : Accordion updateAbsolutePosition() 
-controlP5.ControllerGroup : CColor getColor() 
-controlP5.ControllerGroup : Canvas addCanvas(Canvas) 
-controlP5.ControllerGroup : ControlWindow getWindow() 
-controlP5.ControllerGroup : Controller getController(String) 
-controlP5.ControllerGroup : ControllerProperty getProperty(String) 
-controlP5.ControllerGroup : ControllerProperty getProperty(String, String) 
-controlP5.ControllerGroup : Label getCaptionLabel() 
-controlP5.ControllerGroup : Label getValueLabel() 
-controlP5.ControllerGroup : String getAddress() 
-controlP5.ControllerGroup : String getInfo() 
-controlP5.ControllerGroup : String getName() 
-controlP5.ControllerGroup : String getStringValue() 
-controlP5.ControllerGroup : String toString() 
-controlP5.ControllerGroup : Tab getTab() 
-controlP5.ControllerGroup : boolean isBarVisible() 
-controlP5.ControllerGroup : boolean isCollapse() 
-controlP5.ControllerGroup : boolean isMouseOver() 
-controlP5.ControllerGroup : boolean isMoveable() 
-controlP5.ControllerGroup : boolean isOpen() 
-controlP5.ControllerGroup : boolean isUpdate() 
-controlP5.ControllerGroup : boolean isVisible() 
-controlP5.ControllerGroup : boolean setMousePressed(boolean) 
-controlP5.ControllerGroup : float getArrayValue(int) 
-controlP5.ControllerGroup : float getValue() 
-controlP5.ControllerGroup : float[] getArrayValue() 
-controlP5.ControllerGroup : float[] getPosition() 
-controlP5.ControllerGroup : int getHeight() 
-controlP5.ControllerGroup : int getId() 
-controlP5.ControllerGroup : int getWidth() 
-controlP5.ControllerGroup : int listenerSize() 
-controlP5.ControllerGroup : void controlEvent(ControlEvent) 
-controlP5.ControllerGroup : void remove() 
-java.lang.Object : String toString() 
-java.lang.Object : boolean equals(Object) 
-
-created: 2015/03/24 12:25:32
-
-*/
