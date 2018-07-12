@@ -8,7 +8,7 @@ public class DataLoader {
   
  
   public static final String BASE_FOLDER= "/Users/raminfarhanian/projects/Visualization/midterm/Processing-Dashboard02/Dashboard_Initial/Data";
-  //private static final String BASE_FOLDER= "/Users/ramya/Documents/GitHub/Processing-Dashboard02/Dashboard/Data";
+  public static final String BASE_FOLDER= "/Users/ramya/Documents/GitHub/Processing-Dashboard02/Dashboard/Data";
   private static final String JSON_FOLDER = BASE_FOLDER + "/json/";
   private static final String COUNTRY_NAME_PATH = JSON_FOLDER + "country-by-name.json";
   private static final String COUNTRY_ABBREVIATION_PATH = JSON_FOLDER + "country-by-abbreviation.json";
@@ -17,6 +17,9 @@ public class DataLoader {
   private static final String COUNTRY_CALLING_CODE_PATH = JSON_FOLDER + "country-by-calling-code.json";
   private static final String COUNTRY_CAPITAL_CITY_PATH = JSON_FOLDER + "country-by-capital-city.json";
   private static final String COUNTRY_LIFE_EXPECTANCY_PATH = JSON_FOLDER + "country-by-life-expectancy.json";
+  private static final String COUNTRY_LONGITUDE_LATITUDE_PATH = JSON_FOLDER + "country-by-long-lat.json";
+
+  
  
  public static Map<String, Country> init() {
  
@@ -28,6 +31,7 @@ public class DataLoader {
     loadCallingCode(map);
     loadCapitalCity(map);
     loadLifeExpectancy(map); 
+    loadLongitudeAndLatitude(map);
     return map;
    } catch(Exception e) {
      throw new IllegalStateException(e);
@@ -155,6 +159,26 @@ private static void loadBarcode(Map<String, Country> countries) throws Exception
   }
  }
  
+
+    private static void loadLongitudeAndLatitude(Map<String, Country> countries) throws Exception {
+
+        JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_LONGITUDE_LATITUDE_PATH));
+        for(int i = 0; i < jsonArray.size(); i++){
+            JSONObject jsonItem = jsonArray.getJSONObject(i);
+            String name = (String) jsonItem.get("name");
+            //System.out.println(name);
+            Country country = countries.get(name);
+            if(country!=null && !jsonItem.isNull("latitude") && !jsonItem.isNull("longitude")) {
+                country.setLongitude((Double)jsonItem.get("longitude"));
+                country.setLatitude((Double)jsonItem.get("latitude"));
+            }
+            else {
+                System.out.println("country not available for Longitude or Latitude: " + name);
+            }
+        }
+    }
+
+
  private static String readFile(String fileName) {
   StringBuilder stringBuilder= new StringBuilder();
   try {

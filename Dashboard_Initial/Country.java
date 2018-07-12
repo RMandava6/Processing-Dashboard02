@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Country {
 
     private String name;
@@ -31,6 +33,8 @@ public class Country {
     private Float area;
     private Float temperature;
     private String measurement;
+    private Double longitude;
+    private Double latitude;
 
 
     public String getName() {
@@ -281,87 +285,68 @@ public class Country {
         this.measurement = measurement;
     }
 
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Country country1 = (Country) o;
-
-        if (name != null ? !name.equals(country1.name) : country1.name != null) return false;
-        if (abbreviation != null ? !abbreviation.equals(country1.abbreviation) : country1.abbreviation != null)
-            return false;
-        if (height != null ? !height.equals(country1.height) : country1.height != null) return false;
-        if (barCode != null ? !barCode.equals(country1.barCode) : country1.barCode != null) return false;
-        if (calling_code != null ? !calling_code.equals(country1.calling_code) : country1.calling_code != null)
-            return false;
-        if (city != null ? !city.equals(country1.city) : country1.city != null) return false;
-        if (continent != null ? !continent.equals(country1.continent) : country1.continent != null) return false;
-        if (costline != null ? !costline.equals(country1.costline) : country1.costline != null) return false;
-        if (currency_code != null ? !currency_code.equals(country1.currency_code) : country1.currency_code != null)
-            return false;
-        if (currency_name != null ? !currency_name.equals(country1.currency_name) : country1.currency_name != null)
-            return false;
-        if (tld != null ? !tld.equals(country1.tld) : country1.tld != null) return false;
-        if (elevation != null ? !elevation.equals(country1.elevation) : country1.elevation != null) return false;
-        if (flag_base64 != null ? !flag_base64.equals(country1.flag_base64) : country1.flag_base64 != null)
-            return false;
-        if (north != null ? !north.equals(country1.north) : country1.north != null) return false;
-        if (south != null ? !south.equals(country1.south) : country1.south != null) return false;
-        if (east != null ? !east.equals(country1.east) : country1.east != null) return false;
-        if (west != null ? !west.equals(country1.west) : country1.west != null) return false;
-        if (government != null ? !government.equals(country1.government) : country1.government != null) return false;
-        if (independence != null ? !independence.equals(country1.independence) : country1.independence != null)
-            return false;
-        if (iso != null ? !iso.equals(country1.iso) : country1.iso != null) return false;
-        if (landlocked != null ? !landlocked.equals(country1.landlocked) : country1.landlocked != null) return false;
-        if (language != null ? !language.equals(country1.language) : country1.language != null) return false;
-        if (expectancy != null ? !expectancy.equals(country1.expectancy) : country1.expectancy != null) return false;
-        if (dish != null ? !dish.equals(country1.dish) : country1.dish != null) return false;
-        if (symbol != null ? !symbol.equals(country1.symbol) : country1.symbol != null) return false;
-        if (density != null ? !density.equals(country1.density) : country1.density != null) return false;
-        if (population != null ? !population.equals(country1.population) : country1.population != null) return false;
-        if (location != null ? !location.equals(country1.location) : country1.location != null) return false;
-        if (area != null ? !area.equals(country1.area) : country1.area != null) return false;
-        if (temperature != null ? !temperature.equals(country1.temperature) : country1.temperature != null)
-            return false;
-        return measurement != null ? measurement.equals(country1.measurement) : country1.measurement == null;
+        Country country = (Country) o;
+        return Objects.equals(name, country.name) &&
+                Objects.equals(abbreviation, country.abbreviation) &&
+                Objects.equals(height, country.height) &&
+                Objects.equals(barCode, country.barCode) &&
+                Objects.equals(calling_code, country.calling_code) &&
+                Objects.equals(city, country.city) &&
+                Objects.equals(continent, country.continent) &&
+                Objects.equals(costline, country.costline) &&
+                Objects.equals(currency_code, country.currency_code) &&
+                Objects.equals(currency_name, country.currency_name) &&
+                Objects.equals(tld, country.tld) &&
+                Objects.equals(elevation, country.elevation) &&
+                Objects.equals(flag_base64, country.flag_base64) &&
+                Objects.equals(north, country.north) &&
+                Objects.equals(south, country.south) &&
+                Objects.equals(east, country.east) &&
+                Objects.equals(west, country.west) &&
+                Objects.equals(government, country.government) &&
+                Objects.equals(independence, country.independence) &&
+                Objects.equals(iso, country.iso) &&
+                Objects.equals(landlocked, country.landlocked) &&
+                Objects.equals(language, country.language) &&
+                Objects.equals(expectancy, country.expectancy) &&
+                Objects.equals(dish, country.dish) &&
+                Objects.equals(symbol, country.symbol) &&
+                Objects.equals(density, country.density) &&
+                Objects.equals(population, country.population) &&
+                Objects.equals(location, country.location) &&
+                Objects.equals(area, country.area) &&
+                Objects.equals(temperature, country.temperature) &&
+                Objects.equals(measurement, country.measurement) &&
+                Objects.equals(longitude, country.longitude) &&
+                Objects.equals(latitude, country.latitude);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (abbreviation != null ? abbreviation.hashCode() : 0);
-        result = 31 * result + (height != null ? height.hashCode() : 0);
-        result = 31 * result + (barCode != null ? barCode.hashCode() : 0);
-        result = 31 * result + (calling_code != null ? calling_code.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (continent != null ? continent.hashCode() : 0);
-        result = 31 * result + (costline != null ? costline.hashCode() : 0);
-        result = 31 * result + (currency_code != null ? currency_code.hashCode() : 0);
-        result = 31 * result + (currency_name != null ? currency_name.hashCode() : 0);
-        result = 31 * result + (tld != null ? tld.hashCode() : 0);
-        result = 31 * result + (elevation != null ? elevation.hashCode() : 0);
-        result = 31 * result + (flag_base64 != null ? flag_base64.hashCode() : 0);
-        result = 31 * result + (north != null ? north.hashCode() : 0);
-        result = 31 * result + (south != null ? south.hashCode() : 0);
-        result = 31 * result + (east != null ? east.hashCode() : 0);
-        result = 31 * result + (west != null ? west.hashCode() : 0);
-        result = 31 * result + (government != null ? government.hashCode() : 0);
-        result = 31 * result + (independence != null ? independence.hashCode() : 0);
-        result = 31 * result + (iso != null ? iso.hashCode() : 0);
-        result = 31 * result + (landlocked != null ? landlocked.hashCode() : 0);
-        result = 31 * result + (language != null ? language.hashCode() : 0);
-        result = 31 * result + (expectancy != null ? expectancy.hashCode() : 0);
-        result = 31 * result + (dish != null ? dish.hashCode() : 0);
-        result = 31 * result + (symbol != null ? symbol.hashCode() : 0);
-        result = 31 * result + (density != null ? density.hashCode() : 0);
-        result = 31 * result + (population != null ? population.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
-        result = 31 * result + (area != null ? area.hashCode() : 0);
-        result = 31 * result + (temperature != null ? temperature.hashCode() : 0);
-        result = 31 * result + (measurement != null ? measurement.hashCode() : 0);
-        return result;
+        return Objects.hash(name, abbreviation, height, barCode, calling_code, city, continent, 
+        costline, currency_code, currency_name, tld, elevation, flag_base64, north, 
+        south, east, west, government, independence, iso, landlocked, language, expectancy, dish, symbol, 
+        density, population, location, area, temperature, measurement, longitude, latitude);
     }
 
     @Override
@@ -389,7 +374,7 @@ public class Country {
                 ", iso='" + iso + '\'' +
                 ", landlocked='" + landlocked + '\'' +
                 ", language='" + language + '\'' +
-                ", expectancy='" + expectancy + '\'' +
+                ", expectancy=" + expectancy +
                 ", dish='" + dish + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", density=" + density +
@@ -398,6 +383,8 @@ public class Country {
                 ", area=" + area +
                 ", temperature=" + temperature +
                 ", measurement='" + measurement + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
                 '}';
     }
 }
