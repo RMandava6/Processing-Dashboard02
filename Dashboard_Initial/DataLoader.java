@@ -16,8 +16,9 @@ public class DataLoader {
   private static final String COUNTRY_CAPITAL_CITY_PATH = JSON_FOLDER + "country-by-capital-city.json";
   private static final String COUNTRY_LIFE_EXPECTANCY_PATH = JSON_FOLDER + "country-by-life-expectancy.json";
   private static final String COUNTRY_LONGITUDE_LATITUDE_PATH = JSON_FOLDER + "country-by-long-lat.json";
-
-  
+  private static final String COUNTRY_POPULATION_PATH = JSON_FOLDER + "country-by-population.json";
+  private static final String COUNTRY_SURFACE_AREA_PATH = JSON_FOLDER + "country-by-surface-area.json";
+  private static final String COUNTRY_BY_YEARLY_AVERAGE_TEMPERATURE = JSON_FOLDER + "country-by-yearly-average-temperature.json";
  
  public static Map<String, Country> init() {
  
@@ -30,6 +31,9 @@ public class DataLoader {
     loadCapitalCity(map);
     loadLifeExpectancy(map); 
     loadLongitudeAndLatitude(map);
+    loadPopulation(map);
+    loadSurfaceArea(map);
+    loadTemperature(map);
     return map;
    } catch(Exception e) {
      throw new IllegalStateException(e);
@@ -182,6 +186,55 @@ private static void loadBarcode(Map<String, Country> countries) throws Exception
         }
     }
 
+    private static void loadPopulation(Map<String, Country> countries) throws Exception {
+
+        JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_POPULATION_PATH));
+        for(int i = 0; i < jsonArray.size(); i++){
+            JSONObject jsonItem = jsonArray.getJSONObject(i);
+            String name = (String) jsonItem.get("country");
+            //System.out.println(name);
+            Country country = countries.get(name);
+            if(country!=null && !jsonItem.isNull("population")) {
+                country.setPopulation((Integer)jsonItem.get("population"));
+            }
+            else {
+                System.out.println("country not available for Population: " + name);
+            }
+        }
+    }
+    
+    private static void loadSurfaceArea(Map<String, Country> countries) throws Exception {
+
+        JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_SURFACE_AREA_PATH));
+        for(int i = 0; i < jsonArray.size(); i++){
+            JSONObject jsonItem = jsonArray.getJSONObject(i);
+            String name = (String) jsonItem.get("country");
+            //System.out.println(name);
+            Country country = countries.get(name);
+            if(country!=null && !jsonItem.isNull("area")) {
+                country.setArea(Float.valueOf(jsonItem.get("area").toString()));
+            }
+            else {
+                System.out.println("country not available for Surface Area: " + name);
+            }
+        }
+    }
+    
+   private static void loadTemperature(Map<String, Country> countries) throws Exception {
+        JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_BY_YEARLY_AVERAGE_TEMPERATURE));
+        for(int i = 0; i < jsonArray.size(); i++){
+            JSONObject jsonItem = jsonArray.getJSONObject(i);
+            String name = (String) jsonItem.get("country");
+            //System.out.println(name);
+            Country country = countries.get(name);
+            if(country!=null && !jsonItem.isNull("temperature")) {
+                country.setTemperature(Float.valueOf(jsonItem.get("temperature").toString()));
+            }
+            else {
+                System.out.println("country not available for Temperature: " + name);
+            }
+        }
+    }
 
  private static String readFile(String fileName) {
   StringBuilder stringBuilder= new StringBuilder();

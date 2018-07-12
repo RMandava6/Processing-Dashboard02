@@ -2,9 +2,9 @@ import java.util.Objects;
 
 public class Country {
 
-    private String name;
+    private String name; 
     private String abbreviation;
-    private Double height;
+    private Double height;  //should be loaded
     private String barCode;
     private String calling_code;
     private String city;
@@ -24,14 +24,14 @@ public class Country {
     private String iso;
     private String landlocked;
     private String language;
-    private Double expectancy;
+    private Double expectancy; //should be loaded (already there)
     private String dish;
     private String symbol;
     private Float density;
-    private Integer population;
+    private Integer population; //should be loaded
     private String location;
-    private Float area;
-    private Float temperature;
+    private Float area;  //should be loaded
+    private Float temperature; //should be loaded
     private String measurement;
     private Double longitude;
     private Double latitude;

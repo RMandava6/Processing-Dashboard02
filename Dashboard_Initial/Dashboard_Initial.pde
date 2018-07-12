@@ -291,7 +291,7 @@ void show(String[] strar){
     }//end of else if dropd==1
     else if(radio<5)
     {
-      Float expectancy = aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0;
+      Float expectancy = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0)/8;
       ellipse( x+710, y+255, expectancy, expectancy);
     }//end of else if radio<5
     }
