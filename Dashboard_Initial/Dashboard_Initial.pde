@@ -15,15 +15,16 @@ int dropd =0;
 int radio=6;
 int clat = 0;
 int clon = 0;
-float gx;
-float gy;
+PFont font;
+int counter;
+int counter2;
 
 int ww = 1024;
 int hh = 512;
 
 int zoom = 1;
 String[] earthquakes;
-String[] geo;
+String[] txt;
 
 float mercX(float lon) {
   lon = radians(lon);
@@ -42,6 +43,10 @@ float mercY(float lat) {
 
 void setup() {
   background(220);
+  frameRate(5);
+  smooth();
+  font = createFont("Arial", 48);
+  textFont(font, 20);
   //size(600, 600);
   size(1224, 712);
   noStroke();
@@ -61,8 +66,7 @@ void setup() {
   
   pin = loadImage(DataLoader.BASE_FOLDER+ "/PinDrop.jpg");
   
-  //Load latitude and longitude data
-  //geo = loadStrings( DataLoader.BASE_FOLDER + "/CountryLatLong.csv");
+  
 }//end of setup
 
 void gui() {
@@ -201,6 +205,7 @@ void dropdown(int n) {
 
 void draw() {
   //background(220);
+  background(0,64);
   surface.setTitle(mouseX + ", " + mouseY);
   pushMatrix();
   translate(200,0);
@@ -249,36 +254,56 @@ void show(){
       country = aCountry.getName();
       if(country.equals(dd))
       {
-        image(pin, x+706, y+255, 10,10); //<>//
-      }
+        image(pin, x+706, y+255, 10,10);
+          //txt[0] = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().toString():"NA");
+          String exp = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().toString():"NA");
+          exp = "Life Expectancy:" + exp;
+          String pop = (aCountry.getPopulation()!=null?aCountry.getPopulation().toString():"NA");
+          pop = "Population:" + pop;
+          //println(txt1);
+          //String txt1 = "Typwriter effect, typing text one by one";
+          //txt[1] = "Population:" + (aCountry.getPopulation()!=null?aCountry.getPopulation():0);
+          //txt[2] = "Surface Area" + (aCountry.getArea()!=null?aCountry.getArea():0);
+          //txt[3] = "Avg Male Height" + (aCountry.getHeight()!=null?aCountry.getHeight():0);
+          //txt[4] = "Temperature" + (aCountry.getTemperature()!=null?aCountry.getTemperature():0);
+          fill(128, 235, 94);
+          typeWriteText(exp, 0);
+          //counter=0;
+          //typeWriteText(pop, 20); //<>//
+      }//end of if
     }//end of else if dropd==1
     else if(radio<6)
     {
       switch(radio){
         case(0):c=color(0, 160, 100, 200);
                 Float expectancy = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0)/6;
+                noStroke();
                 fill(c, 200);
                 ellipse( x+710, y+255, expectancy, expectancy);
                 break;
         case(1):c=color(245,215,94,200);
                 Float population = (aCountry.getPopulation()!=null?aCountry.getPopulation().floatValue():0)/6000000;
+                noStroke();
                 fill(c, 200);
                 ellipse( x+710, y+255, population, population);
                 break;
         case(2)://c=color(41, 59, 173,200);
                 c=color(230,83,41,200);
                 Float area = (aCountry.getArea()!=null?aCountry.getArea().floatValue():0)/60000;
+                noStroke();
                 fill(c, 200);
                 ellipse( x+710, y+255, area, area);
                 break;
         case(3):c=color(0, 128, 255,200);
                 Float height1 = (aCountry.getHeight()!=null?aCountry.getHeight().floatValue():0)/6;
+                noStroke();
                 fill(c, 200);
                 ellipse( x+710, y+255, height1, height1);
                 break;
         case(4)://c=color(50,128);
                 c=color(255,0,0,200);
                 Float temp = (aCountry.getTemperature()!=null?aCountry.getTemperature().floatValue():0)/2;
+                noStroke();
                 fill(c, 200);
                 ellipse( x+710, y+255, temp, temp);
                 break;     
@@ -321,3 +346,12 @@ void show(String[] strar){
       ellipse(x+710, y+255, d, d);
   }//end of for loop    
 }//end of show
+
+void typeWriteText(String txt1, int add){
+ if (counter < txt1.length())
+ {
+    counter++;
+ }
+ int y = 516 + add;
+ text(txt1.substring(0, counter), 201, y, 1020, 192);
+}//end of typerwriteText
