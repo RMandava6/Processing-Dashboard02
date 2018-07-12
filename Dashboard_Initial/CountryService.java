@@ -3,18 +3,44 @@ import java.util.*;
 
 public class CountryService {
 
-    private final List<Country> countries;
+    private List<Country> countries;
     private Map<String, Country> countryMap;
+    private static CountryService INSTANCE = new CountryService();
 
-    public CountryService() {
-       this.countryMap = DataLoader.init();
+    public static CountryService getInstance() {
+        return INSTANCE;
+    }
+
+    private CountryService() {
+        init();
+    }
+
+    private void init() {
+        this.countryMap = DataLoader.init();
         countries = new LinkedList<Country>(countryMap.values());
     }
 
     public Country load(final String name) {
-      return countryMap.get(name);    
+        return countryMap.get(name);
     }
-    
+
+    public List<String> loadCountryNames() {
+        List<String> names = new LinkedList<>();
+        for (Country country : countries) {
+            names.add(country.getName());
+        }
+        return names;
+    }
+
+    public List<String> loadCountryNames(final String sortField, boolean ascending) {
+        List<String> names = new LinkedList<>();
+        List<Country> countries= load(sortField, ascending);
+        for (Country country : countries) {
+            names.add(country.getName());
+        }
+        return names;
+    }
+
     public List<Country> load(final String sortField, boolean ascending) {
         final int factor = ascending ? 1 : -1;
         List<Country> countriesList = new LinkedList<Country>(this.countries);

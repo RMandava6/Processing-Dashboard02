@@ -6,7 +6,7 @@ ControlP5 cp5;
 Accordion accordion;
 
 color c = color(0, 160, 100);
-List l = Arrays.asList("US", "AD", "AE", "AF", "AG", "AL", "AU", "CA");
+List l = CountryService.getInstance().loadCountryNames("name", true);
 PImage mapimg;
 PImage pin;
 String dd;
@@ -62,7 +62,7 @@ void setup() {
   pin = loadImage(DataLoader.BASE_FOLDER+ "/PinDrop.jpg");
   
   //Load latitude and longitude data
-  geo = loadStrings("/Users/ramya/Desktop/Dashboard/Data/CountryLatLong.csv");
+  geo = loadStrings( DataLoader.BASE_FOLDER + "/CountryLatLong.csv");
 }
 
 void gui() {
