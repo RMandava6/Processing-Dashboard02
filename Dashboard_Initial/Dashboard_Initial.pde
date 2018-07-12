@@ -192,19 +192,6 @@ void dropdown(int n) {
   /* request the selected item based on index n */
   println(n, cp5.get(ScrollableList.class, "dropdown").getItem(n));
   println(dd);
-  //if(dd=="US")
-  //{
-  //  println("it matched to US");
-  //}
-  
- //String array[] = cp5.get(ScrollableList.class, "dropdown").getItem(n);
-  /* here an item is stored as a Map  with the following key-value pairs:
-   * name, the given name of the item
-   * text, the given text of the item by default the same as name
-   * value, the given value of the item, can be changed by using .getItem(n).put("value", "abc"); a value here is of type Object therefore can be anything
-   * color, the given color of the item, how to change, see below
-   * view, a customizable view, is of type CDrawable 
-   */
   
   CColor c = new CColor();
   c.setBackground(color(255,0,0));
@@ -228,43 +215,39 @@ void draw() {
   float s2 = cp5.getController("world").getValue();
   //ellipse(400,100,s2,s2);
   
-  //cp5.addCanvas(Canvas);
-  //println(cp5.get(ScrollableList.class, "dropdown").getItem(dd));
-  //noLoop();
   
   if(shuff==1){
     show(earthquakes);
   }//end of if shuff==1
   
-  else if(dropd==1){
-    show(geo);
+  else if(dropd==1 || radio<5){
+    show();
   }//end of else if
   
-  switch(radio) {
-    //case(0):c=color(0,200);break;
-    case(0):show(geo);
-            break;
-    case(1):c=color(255,0,0,200);break;
-    case(2):c=color(0, 200, 140,200);break;
-    case(3):c=color(0, 128, 255,200);break;
-    case(4):c=color(50,128);break;
-  }//end of switch case
+  //switch(radio) {
+  //  case(0):show(geo);
+  //          break;
+  //  case(1):c=color(255,0,0,200);break;
+  //  case(2):c=color(0, 200, 140,200);break;
+  //  case(3):c=color(0, 128, 255,200);break;
+  //  case(4):c=color(50,128);break;
+  //}//end of switch case
   
-   if(key =='c' || key =='C'){
-     dropd=0;
-     shuff=0;
-    //filter(INVERT);
-    //setup();
-   }//end of if
+   //if(key =='c' || key =='C'){
+   //  dropd=0;
+   //  shuff=0;
+   // //filter(INVERT);
+   // //setup();
+   //}//end of if
    
 }//end of draw
 
-void show(String[] strar){
+void show(){
    List<Country> countries = CountryService.getInstance().load("name", true);
   //float cx = mercX(clon);
   //float cy = mercY(clat);
   //float mag;
-  String[] strarray  = strar;
+  //String[] strarray  = strar;
   String country;
   
   for (Country aCountry: countries) {
@@ -329,7 +312,38 @@ void show(String[] strar){
    
 }//end of show()
 
-
+void show(String[] strar){
+  float cx = mercX(clon);
+  float cy = mercY(clat);
+  String[] strarray  = strar;
+  
+  for (int i = 1; i < strarray.length; i++) {
+    String[] data = strarray[i].split(",");
+    //console.log(data);
+    float lat = float(data[1]);
+    float lon = float(data[2]);
+    float mag = float(data[4]);
+    float x = mercX(lon) - cx;
+    float y = mercY(lat) - cy;
+    
+    // This addition fixes the case where the longitude is non-zero and
+    // points can go off the screen.
+    if(x < - width/2) {
+      x += width;
+    } else if(x > width / 2) {
+      x -= width;
+    }
+    
+      mag = pow(10, mag);
+      mag = sqrt(mag);
+      float magmax = sqrt(pow(10, 10));
+      float d = map(mag, 0, magmax, 0, 180);
+      stroke(255, 0, 255);
+      fill(255, 0, 255, 200);
+      //ellipse(x+510, y+260, d, d);
+      ellipse(x+710, y+255, d, d);
+  }//end of for loop    
+}//end of show
 /*
 a list of all methods available for the Accordion Controller
 use ControlP5.printPublicMethodsFor(Accordion.class);
