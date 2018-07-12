@@ -69,7 +69,6 @@ void setup() {
   
   pin = loadImage(DataLoader.BASE_FOLDER+ "/PinDrop.jpg");
   
-  
 }//end of setup
 
 void gui() {
@@ -254,7 +253,6 @@ void show(){
     
     if(dropd==1)
     {
-      //counter=0;
       country = aCountry.getName();
       if(country.equals(dd))
       {
@@ -267,6 +265,8 @@ void show(){
           String area = (aCountry.getArea()!=null?aCountry.getArea().toString():"NA");
           area = "Surface Area:" + area;
           String cont = "Country:" + country;
+          String temp = (aCountry.getTemperature()!=null?aCountry.getTemperature().toString():"NA");
+          temp = "Temperature:" + temp;
           //println(txt1);
           //String txt1 = "Typwriter effect, typing text one by one";
           //txt[1] = "Population:" + (aCountry.getPopulation()!=null?aCountry.getPopulation():0);
@@ -278,8 +278,7 @@ void show(){
           typeWriteText1(exp);
           typeWriteText2(pop);
           typeWriteText3(area);
-          //counter=0;
-          //typeWriteText(pop, 20); //<>//
+          typeWriteText4(temp); //<>//
       }//end of if
     }//end of else if dropd==1
     else if(radio<6)
