@@ -12,27 +12,12 @@ color c = color(0, 160, 100);
 
 void setup() {
   
-  try {
-    Map<String, Country> map = DataLoader.loadCountryMap();
-    
-    DataLoader.loadAbbreviation(map);
-    DataLoader.loadAverageHeight(map);
-    DataLoader.loadBarcode(map);
-    DataLoader.loadCallingCode(map);
-    DataLoader.loadCapitalCity(map);
-    DataLoader.loadLifeExpectancy(map);
-    
-    CountryService countryService = new CountryService(map);
+    CountryService countryService = new CountryService();
     List<Country> result = countryService.load("name", false);
     //all countries in the result are loaded in reverse order based on "name". The result will start with zimbawe and should end with a country like albany.
     //for (Country country : result) {
        //System.out.println("country = " + country);
     //}
-  }
-  catch(Exception e ) {
-    System.out.println("exception: " + e);
-   throw new IllegalStateException("Could not load initial data", e); 
-  }
   
   leftPanel = new LeftPanel(this);
   rightPanel = new RightPanel(this);

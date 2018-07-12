@@ -6,8 +6,8 @@ import java.io.*;
 
 public class DataLoader {
   
-  //private static final String BASE_FOLDER= "/Users/ramin/IdeaProjects/Processing-Dashboard02/Dashboard/Data/json";
-  private static final String BASE_FOLDER= "/Users/ramya/Documents/GitHub/Processing-Dashboard02/Dashboard/Data/json";
+  private static final String BASE_FOLDER= "/Users/raminfarhanian/projects/Visualization/midterm/Processing-Dashboard02/Dashboard/Data/json";
+  //private static final String BASE_FOLDER= "/Users/ramya/Documents/GitHub/Processing-Dashboard02/Dashboard/Data/json";
   private static final String COUNTRY_NAME_PATH = BASE_FOLDER + "/" +"country-by-name.json";
   private static final String COUNTRY_ABBREVIATION_PATH = BASE_FOLDER + "/" +"country-by-abbreviation.json";
   private static final String COUNTRY_AVERAGE_MALE_HEIGHT_PATH = BASE_FOLDER + "/" +"country-by-avg-male-height.json";
@@ -16,7 +16,23 @@ public class DataLoader {
   private static final String COUNTRY_CAPITAL_CITY_PATH = BASE_FOLDER + "/" + "country-by-capital-city.json";
   private static final String COUNTRY_LIFE_EXPECTANCY_PATH = BASE_FOLDER + "/" + "country-by-life-expectancy.json";
  
- public static Map<String, Country> loadCountryMap() throws Exception {
+ public static Map<String, Country> init() {
+ 
+   try {
+   Map<String, Country> map = DataLoader.loadCountryMap();
+    loadAbbreviation(map);
+    loadAverageHeight(map);
+    loadBarcode(map);
+    loadCallingCode(map);
+    loadCapitalCity(map);
+    loadLifeExpectancy(map); 
+    return map;
+   } catch(Exception e) {
+     throw new IllegalStateException(e);
+   }
+ 
+ }
+ private static Map<String, Country> loadCountryMap() throws Exception {
    Map<String, Country> countryMap = new HashMap<>();
    JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_NAME_PATH));
    
@@ -30,7 +46,7 @@ public class DataLoader {
    return countryMap;
  }
 
-public static void loadAbbreviation(Map<String, Country> countries) throws Exception {
+private static void loadAbbreviation(Map<String, Country> countries) throws Exception {
    JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_ABBREVIATION_PATH));
    
    
@@ -48,7 +64,7 @@ public static void loadAbbreviation(Map<String, Country> countries) throws Excep
   }}
  }
 
-public static void loadAverageHeight(Map<String, Country> countries) throws Exception {
+private static void loadAverageHeight(Map<String, Country> countries) throws Exception {
    JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_AVERAGE_MALE_HEIGHT_PATH));
    
    for(int i = 0; i < jsonArray.size(); i++){
@@ -66,7 +82,7 @@ public static void loadAverageHeight(Map<String, Country> countries) throws Exce
   }
  }
 
-public static void loadBarcode(Map<String, Country> countries) throws Exception {
+private static void loadBarcode(Map<String, Country> countries) throws Exception {
    JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_BARCODE_PATH));
    
    for(int i = 0; i < jsonArray.size(); i++){
@@ -83,7 +99,7 @@ public static void loadBarcode(Map<String, Country> countries) throws Exception 
   }
  }
  
- public static void loadCallingCode(Map<String, Country> countries) throws Exception {
+ private static void loadCallingCode(Map<String, Country> countries) throws Exception {
    String callingCode = readFile(COUNTRY_CALLING_CODE_PATH);
    //System.out.println(callingCode);
    JSONArray jsonArray = JSONArray.parse(callingCode);
@@ -103,7 +119,7 @@ public static void loadBarcode(Map<String, Country> countries) throws Exception 
   }
  }
  
- public static void loadCapitalCity(Map<String, Country> countries) throws Exception {
+ private static void loadCapitalCity(Map<String, Country> countries) throws Exception {
    
    JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_CAPITAL_CITY_PATH));
    for(int i = 0; i < jsonArray.size(); i++){
@@ -120,7 +136,7 @@ public static void loadBarcode(Map<String, Country> countries) throws Exception 
   }
  }
  
- public static void loadLifeExpectancy(Map<String, Country> countries) throws Exception {
+ private static void loadLifeExpectancy(Map<String, Country> countries) throws Exception {
    
    JSONArray jsonArray = JSONArray.parse(readFile(COUNTRY_LIFE_EXPECTANCY_PATH));
    for(int i = 0; i < jsonArray.size(); i++){

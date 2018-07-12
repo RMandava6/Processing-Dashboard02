@@ -6,12 +6,15 @@ public class CountryService {
     private final List<Country> countries;
     private Map<String, Country> countryMap;
 
-    public CountryService(Map<String, Country> countryMap) {
-
-        this.countryMap = countryMap;
+    public CountryService() {
+       this.countryMap = DataLoader.init();
         countries = new LinkedList<Country>(countryMap.values());
     }
 
+    public Country load(final String name) {
+      return countryMap.get(name);    
+    }
+    
     public List<Country> load(final String sortField, boolean ascending) {
         final int factor = ascending ? 1 : -1;
         List<Country> countriesList = new LinkedList<Country>(this.countries);
