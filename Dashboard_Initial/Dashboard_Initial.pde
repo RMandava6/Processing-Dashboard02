@@ -67,7 +67,7 @@ void setup() {
   //Loading earthquakes csv from the below URL
   earthquakes = loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv");
   
-  pin = loadImage(DataLoader.BASE_FOLDER+ "/PinDrop.jpg");
+  pin = loadImage(DataLoader.BASE_FOLDER+ "/Droppin.png");
   
 }//end of setup
 
@@ -208,7 +208,7 @@ void dropdown(int n) {
 void draw() {
   //background(220);
   background(0,64);
-  surface.setTitle(mouseX + ", " + mouseY);
+  //surface.setTitle(mouseX + ", " + mouseY);
   pushMatrix();
   translate(200,0);
   image(mapimg,0,0);
@@ -256,7 +256,8 @@ void show(){
       country = aCountry.getName();
       if(country.equals(dd))
       {
-        image(pin, x+706, y+255, 10,10);
+        //tint(255, 127);
+        image(pin, x+706, y+255, 10,15);
           //txt[0] = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().toString():"NA");
           String exp = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().toString():"NA");
           exp = "Life Expectancy:" + exp;
@@ -304,7 +305,7 @@ void show(){
                 ellipse( x+710, y+255, area, area);
                 break;
         case(3):c=color(0, 128, 255,200);
-                Float height1 = (aCountry.getHeight()!=null?aCountry.getHeight().floatValue():0)/6;
+                Float height1 = ((aCountry.getHeight()!=null?aCountry.getHeight().floatValue():0)-160)/6;
                 noStroke();
                 fill(c, 200);
                 ellipse( x+710, y+255, height1, height1);
