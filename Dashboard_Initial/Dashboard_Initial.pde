@@ -69,17 +69,16 @@ void gui() {
   
   cp5 = new ControlP5(this);
   
- // List l = Arrays.asList("US", "AD", "AE", "AF", "AG", "AL", "AU", "CA");
   
   // group number 1, contains scrollable list
-  Group g1 = cp5.addGroup("myGroup1")
+  Group g1 = cp5.addGroup("Country List")
                 .setBackgroundColor(color(0, 64))
                 .setBackgroundHeight(228)
                 ;
      
   cp5.addScrollableList("dropdown")
      .setPosition(10, 20)
-     .setSize(100, 100)
+     .setSize(150, 200)
      .setBarHeight(20)
      .setItemHeight(20)
      .addItems(l)
@@ -87,7 +86,7 @@ void gui() {
      ;
      
   // group number 2, contains a radiobutton
-  Group g2 = cp5.addGroup("myGroup2")
+  Group g2 = cp5.addGroup("International Stats")
                 .setBackgroundColor(color(0, 64))
                 .setBackgroundHeight(228)
                 ;
@@ -107,7 +106,7 @@ void gui() {
      ;
 
   // group number 3, contains a bang and a slider
-  Group g3 = cp5.addGroup("myGroup3")
+  Group g3 = cp5.addGroup("Earthquake Data")
                 .setBackgroundColor(color(0, 64))
                 .setBackgroundHeight(228)
                 ;
@@ -300,11 +299,10 @@ void show(String[] strar){
     
     else if(dropd==1)
     {
-      country = data[0].toString();
+      country = data[3].toString();
       if(country.equals(dd))
       {
         image(pin, x+706, y+255, 10,10); //<>//
-        //println("dd is",dd);
       }
     }//end of else if dropd==1
     

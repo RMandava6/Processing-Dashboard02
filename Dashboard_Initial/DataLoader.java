@@ -5,10 +5,8 @@ import processing.core.*;
 import java.io.*;
 
 public class DataLoader {
-  
- 
   public static final String BASE_FOLDER= "/Users/raminfarhanian/projects/Visualization/midterm/Processing-Dashboard02/Dashboard_Initial/Data";
-  public static final String BASE_FOLDER= "/Users/ramya/Documents/GitHub/Processing-Dashboard02/Dashboard/Data";
+  //public static final String BASE_FOLDER= "/Users/ramya/Documents/GitHub/Processing-Dashboard02/Dashboard_Initial/Data";
   private static final String JSON_FOLDER = BASE_FOLDER + "/json/";
   private static final String COUNTRY_NAME_PATH = JSON_FOLDER + "country-by-name.json";
   private static final String COUNTRY_ABBREVIATION_PATH = JSON_FOLDER + "country-by-abbreviation.json";
