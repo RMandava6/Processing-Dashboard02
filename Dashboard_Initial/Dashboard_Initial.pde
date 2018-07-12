@@ -17,7 +17,10 @@ int clat = 0;
 int clon = 0;
 PFont font;
 int counter;
+int counter1;
 int counter2;
+int counter3;
+int counter4;
 
 int ww = 1024;
 int hh = 512;
@@ -251,6 +254,7 @@ void show(){
     
     if(dropd==1)
     {
+      //counter=0;
       country = aCountry.getName();
       if(country.equals(dd))
       {
@@ -260,6 +264,9 @@ void show(){
           exp = "Life Expectancy:" + exp;
           String pop = (aCountry.getPopulation()!=null?aCountry.getPopulation().toString():"NA");
           pop = "Population:" + pop;
+          String area = (aCountry.getArea()!=null?aCountry.getArea().toString():"NA");
+          area = "Surface Area:" + area;
+          String cont = "Country:" + country;
           //println(txt1);
           //String txt1 = "Typwriter effect, typing text one by one";
           //txt[1] = "Population:" + (aCountry.getPopulation()!=null?aCountry.getPopulation():0);
@@ -267,7 +274,10 @@ void show(){
           //txt[3] = "Avg Male Height" + (aCountry.getHeight()!=null?aCountry.getHeight():0);
           //txt[4] = "Temperature" + (aCountry.getTemperature()!=null?aCountry.getTemperature():0);
           fill(128, 235, 94);
-          typeWriteText(exp, 0);
+          typeWriteText(cont);
+          typeWriteText1(exp);
+          typeWriteText2(pop);
+          typeWriteText3(area);
           //counter=0;
           //typeWriteText(pop, 20); //<>//
       }//end of if
@@ -347,11 +357,60 @@ void show(String[] strar){
   }//end of for loop    
 }//end of show
 
-void typeWriteText(String txt1, int add){
+void typeWriteText(String txt1){
  if (counter < txt1.length())
  {
     counter++;
  }
- int y = 516 + add;
- text(txt1.substring(0, counter), 201, y, 1020, 192);
+ else{ counter =0;}
+ //int y = 516 + add;
+ text(txt1.substring(0, counter), 201, 516, 1020, 192);
+}//end of typerwriteText
+
+void typeWriteText1(String txt1){
+ if (counter1 < txt1.length())
+ {
+    counter1++;
+ }
+ else if(counter1 > txt1.length())
+ { 
+   counter1=0;
+ }
+ text(txt1.substring(0, counter1), 201, 546, 1020, 192);
+}//end of typerwriteText
+
+void typeWriteText2(String txt1){
+ if (counter2 < txt1.length())
+ {
+    counter2++;
+ }
+ else if(counter2 > txt1.length())
+ { 
+   counter2=0;
+ }
+ text(txt1.substring(0, counter2), 201, 576, 1020, 192);
+}//end of typerwriteText
+
+void typeWriteText3(String txt1){
+ if (counter3 < txt1.length())
+ {
+    counter3++;
+ }
+ else if(counter3 > txt1.length())
+ { 
+   counter3=0;
+ }
+ text(txt1.substring(0, counter3), 201, 606, 1020, 192);
+}//end of typerwriteText
+
+void typeWriteText4(String txt1){
+ if (counter4 < txt1.length())
+ {
+    counter4++;
+ }
+ else if(counter4 > txt1.length())
+ { 
+   counter4=0;
+ }
+ text(txt1.substring(0, counter4), 201, 636, 1020, 192);
 }//end of typerwriteText
