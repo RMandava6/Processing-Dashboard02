@@ -45,7 +45,7 @@ void setup() {
   background(220);
   frameRate(5);
   smooth();
-  font = createFont("Arial", 48);
+  font = createFont("Arial Rounded MT", 48);
   textFont(font, 20);
   //size(600, 600);
   size(1224, 712);
