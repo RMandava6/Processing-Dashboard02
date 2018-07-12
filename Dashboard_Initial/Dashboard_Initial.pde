@@ -260,57 +260,72 @@ void draw() {
 }//end of draw
 
 void show(String[] strar){
-  float cx = mercX(clon);
-  float cy = mercY(clat);
+   List<Country> countries = CountryService.getInstance().load("name", true);
+  //float cx = mercX(clon);
+  //float cy = mercY(clat);
   //float mag;
   String[] strarray  = strar;
   String country;
   
-  //c = color(random(255),random(255),random(255),random(128,255));
-  for (int i = 1; i < strarray.length; i++) {
-    String[] data = strarray[i].split(",");
-    //console.log(data);
-    float lat = float(data[1]);
-    float lon = float(data[2]);
-    float x = mercX(lon) - cx;
-    float y = mercY(lat) - cy;
+  for (Country aCountry: countries) {
+    System.out.println(aCountry.getName());
+    
+    Float x = aCountry.getX();
+    Float y = aCountry.getY();    
     // This addition fixes the case where the longitude is non-zero and
     // points can go off the screen.
-    if(x < - width/2) {
-      x += width;
-    } else if(x > width / 2) {
-      x -= width;
-    }
-    
-    
-    
-    if(shuff==1)
+    if(x!=null && y !=null) {
+      if(x < - width/2) {
+        x += width;
+      } else if(x > width / 2) {
+        x -= width;
+      }
+      
+     if(dropd==1)
     {
-      float mag = float(data[4]);
-      mag = pow(10, mag);
-      mag = sqrt(mag);
-      float magmax = sqrt(pow(10, 10));
-      float d = map(mag, 0, magmax, 0, 180);
-      stroke(255, 0, 255);
-      fill(255, 0, 255, 200);
-      //ellipse(x+510, y+260, d, d);
-      ellipse(x+710, y+255, d, d);
-    }//end of if shuff==1
-    
-    else if(dropd==1)
-    {
-      country = data[3].toString();
+      country = aCountry.getName();
       if(country.equals(dd))
       {
         image(pin, x+706, y+255, 10,10); //<>//
       }
     }//end of else if dropd==1
-    
     else if(radio<5)
     {
-      ellipse( x+710, y+255, 3,3);
+      Float expectancy = aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0;
+      ellipse( x+710, y+255, expectancy, expectancy);
     }//end of else if radio<5
-   }//end of for loop
+    }
+    
+    
+    
+    //if(shuff==1)
+    //{
+    //  float mag = float(data[4]);
+    //  mag = pow(10, mag);
+    //  mag = sqrt(mag);
+    //  float magmax = sqrt(pow(10, 10)); //<>//
+    //  float d = map(mag, 0, magmax, 0, 180);
+    //  stroke(255, 0, 255);
+    //  fill(255, 0, 255, 200);
+    //  //ellipse(x+510, y+260, d, d);
+    //  ellipse(x+710, y+255, d, d);
+    //}//end of if shuff==1
+    
+    //else if(dropd==1)
+    //{
+    //  country = data[3].toString();
+    //  if(country.equals(dd))
+    //  {
+    //    image(pin, x+706, y+255, 10,10); //<>//
+    //  }
+    //}//end of else if dropd==1
+    
+    //else if(radio<5)
+    //{
+    //  ellipse( x+710, y+255, 3,3);
+    //}//end of else if radio<5
+  }
+  
    
 }//end of show()
 

@@ -35,6 +35,8 @@ public class Country {
     private String measurement;
     private Double longitude;
     private Double latitude;
+    private Float x;
+    private Float y;
 
 
     public String getName() {
@@ -301,8 +303,25 @@ public class Country {
         this.latitude = latitude;
     }
 
+    public Float getX() {
+        return x;
+    }
+
+    public void setX(Float x) {
+        this.x = x;
+    }
+
+    public Float getY() {
+        return y;
+    }
+
+    public void setY(Float y) {
+        this.y = y;
+    }
+
     @Override
     public boolean equals(Object o) {
+        
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
@@ -338,15 +357,19 @@ public class Country {
                 Objects.equals(temperature, country.temperature) &&
                 Objects.equals(measurement, country.measurement) &&
                 Objects.equals(longitude, country.longitude) &&
-                Objects.equals(latitude, country.latitude);
+                Objects.equals(latitude, country.latitude) &&
+                Objects.equals(x, country.x) &&
+                Objects.equals(y, country.y);
     }
 
     @Override
     public int hashCode() {
+
         return Objects.hash(name, abbreviation, height, barCode, calling_code, city, continent, 
-        costline, currency_code, currency_name, tld, elevation, flag_base64, north, 
-        south, east, west, government, independence, iso, landlocked, language, expectancy, dish, symbol, 
-        density, population, location, area, temperature, measurement, longitude, latitude);
+                costline, currency_code, currency_name, tld, elevation, flag_base64, north, 
+                south, east, west, government, independence, iso, landlocked, language, 
+                expectancy, dish, symbol, density, population, location, area, temperature,
+                measurement, longitude, latitude, x, y);
     }
 
     @Override
@@ -385,6 +408,8 @@ public class Country {
                 ", measurement='" + measurement + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
+                ", x=" + x +
+                ", y=" + y +
                 '}';
     }
 }

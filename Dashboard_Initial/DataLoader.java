@@ -169,6 +169,12 @@ private static void loadBarcode(Map<String, Country> countries) throws Exception
             if(country!=null && !jsonItem.isNull("latitude") && !jsonItem.isNull("longitude")) {
                 country.setLongitude((Double)jsonItem.get("longitude"));
                 country.setLatitude((Double)jsonItem.get("latitude"));
+                float cx = CoordinationUtils.mercX(0, 1);
+                float cy = CoordinationUtils.mercY(0, 1);
+                float x = CoordinationUtils.mercX(country.getLongitude().floatValue(), 1) - cx;
+                float y = CoordinationUtils.mercY(country.getLatitude().floatValue(), 1) - cy;
+                country.setX(x);
+                country.setY(y);
             }
             else {
                 System.out.println("country not available for Longitude or Latitude: " + name);
