@@ -4,7 +4,7 @@ public class Country {
 
     private String name; 
     private String abbreviation;
-    private Double height;  //should be loaded
+    private Double height1;  //should be loaded
     private String barCode;
     private String calling_code;
     private String city;
@@ -56,11 +56,11 @@ public class Country {
     }
 
     public Double getHeight() {
-        return height;
+        return height1;
     }
 
-    public void setHeight(Double height) {
-        this.height = height;
+    public void setHeight(Double height1) {
+        this.height1 = height1;
     }
 
     public String getBarCode() {
@@ -327,7 +327,7 @@ public class Country {
         Country country = (Country) o;
         return Objects.equals(name, country.name) &&
                 Objects.equals(abbreviation, country.abbreviation) &&
-                Objects.equals(height, country.height) &&
+                Objects.equals(height1, country.height1) &&
                 Objects.equals(barCode, country.barCode) &&
                 Objects.equals(calling_code, country.calling_code) &&
                 Objects.equals(city, country.city) &&
@@ -365,7 +365,7 @@ public class Country {
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, abbreviation, height, barCode, calling_code, city, continent, 
+        return Objects.hash(name, abbreviation, height1, barCode, calling_code, city, continent, 
                 costline, currency_code, currency_name, tld, elevation, flag_base64, north, 
                 south, east, west, government, independence, iso, landlocked, language, 
                 expectancy, dish, symbol, density, population, location, area, temperature,
@@ -377,7 +377,7 @@ public class Country {
         return "Country{" +
                 "name='" + name + '\'' +
                 ", abbreviation='" + abbreviation + '\'' +
-                ", height=" + height +
+                ", height=" + height1 +
                 ", barCode='" + barCode + '\'' +
                 ", calling_code='" + calling_code + '\'' +
                 ", city='" + city + '\'' +

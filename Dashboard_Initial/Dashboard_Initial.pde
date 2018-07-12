@@ -12,7 +12,7 @@ PImage pin;
 String dd;
 int shuff=0;
 int dropd =0;
-int radio;
+int radio=5;
 int clat = 0;
 int clon = 0;
 float gx;
@@ -243,7 +243,6 @@ void show(){
         x -= width;
       }
     
-    
     if(dropd==1)
     {
       country = aCountry.getName();
@@ -255,13 +254,26 @@ void show(){
     else if(radio<5)
     {
       switch(radio){
-        case(0):c=color(0,200);
-                Float expectancy = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0)/8;
+        case(0):c=color(0, 160, 100, 200);
+                Float expectancy = (aCountry.getExpectancy()!=null?aCountry.getExpectancy().floatValue():0)/6;
+                fill(c, 200);
                 ellipse( x+710, y+255, expectancy, expectancy);
                 break;
-        case(1):c=color(255,0,0,200);break;
-        case(2):c=color(0, 200, 140,200);break;
-        case(3):c=color(0, 128, 255,200);break;
+        case(1):c=color(255,0,0,200);
+                Float population = (aCountry.getPopulation()!=null?aCountry.getPopulation().floatValue():0)/6000000;
+                fill(c, 200);
+                ellipse( x+710, y+255, population, population);
+                break;
+        case(2):c=color(0, 200, 140,200);
+                Float area = (aCountry.getArea()!=null?aCountry.getArea().floatValue():0)/60000;
+                fill(c, 200);
+                ellipse( x+710, y+255, area, area);
+                break;
+        case(3):c=color(0, 128, 255,200);
+                Float height1 = (aCountry.getHeight()!=null?aCountry.getHeight().floatValue():0)/2;
+                fill(c, 200);
+                ellipse( x+710, y+255, height1, height1);
+                break;
         case(4):c=color(50,128);break;
       }//end of switch case
     }//end of else if radio<5
