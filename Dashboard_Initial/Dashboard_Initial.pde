@@ -55,13 +55,6 @@ void setup() {
     ww + "x" + hh +
     "?access_token=pk.eyJ1Ijoicm1hbmRhdmEiLCJhIjoiY2pqZ2x3dmZrNWE4cTNrcDE5cmg5d29qZiJ9.Nm_sF_3GjloxJxY2JuQN_w";
   mapimg = loadImage(url, "jpg");
-  //println(url);
-  
-  //pushMatrix();
-  //translate(200,0);
-  //image(mapimg,0,0);
-  //popMatrix();
-  
   
   //Loading earthquakes csv from the below URL
   earthquakes = loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv");
@@ -83,13 +76,6 @@ void gui() {
                 .setBackgroundColor(color(0, 64))
                 .setBackgroundHeight(228)
                 ;
-  
-  //cp5.addBang("bang")
-  //   .setPosition(10,20)
-  //   .setSize(100,100)
-  //   .moveTo(g1)
-  //   .plugTo(this,"shuffle");
-  //   ;
      
   cp5.addScrollableList("dropdown")
      .setPosition(10, 20)
@@ -116,7 +102,7 @@ void gui() {
      .addItem("Avg Male Height", 3)
      .addItem("grey", 4)
      .setColorLabel(color(255))
-     .activate(2)
+     .activate(4)
      .moveTo(g2)
      ;
 
@@ -206,7 +192,11 @@ void dropdown(int n) {
   dropd=1;
   /* request the selected item based on index n */
   println(n, cp5.get(ScrollableList.class, "dropdown").getItem(n));
-  println(l.get(n));
+  println(dd);
+  //if(dd=="US")
+  //{
+  //  println("it matched to US");
+  //}
   
  //String array[] = cp5.get(ScrollableList.class, "dropdown").getItem(n);
   /* here an item is stored as a Map  with the following key-value pairs:
@@ -225,7 +215,7 @@ void dropdown(int n) {
 
 void draw() {
   //background(220);
-  frame.setTitle(mouseX + ", " + mouseY);
+  surface.setTitle(mouseX + ", " + mouseY);
   pushMatrix();
   translate(200,0);
   image(mapimg,0,0);
@@ -244,83 +234,16 @@ void draw() {
   //noLoop();
   
   if(shuff==1){
-    float cx = mercX(clon);
-  float cy = mercY(clat);
-  
-  //c = color(random(255),random(255),random(255),random(128,255));
-  for (int i = 1; i < earthquakes.length; i++) {
-    String[] data = earthquakes[i].split(",");
-    //console.log(data);
-    float lat = float(data[1]);
-    float lon = float(data[2]);
-    float mag = float(data[4]);
-    float x = mercX(lon) - cx;
-    float y = mercY(lat) - cy;
-    // This addition fixes the case where the longitude is non-zero and
-    // points can go off the screen.
-    if(x < - width/2) {
-      x += width;
-    } else if(x > width / 2) {
-      x -= width;
-    }
-    mag = pow(10, mag);
-    mag = sqrt(mag);
-    float magmax = sqrt(pow(10, 10));
-    float d = map(mag, 0, magmax, 0, 180);
-    stroke(255, 0, 255);
-    fill(255, 0, 255, 200);
-    //ellipse(x+510, y+260, d, d);
-    ellipse(x+710, y+255, d, d);
-   }//end of for loop
+    show(earthquakes);
   }//end of if shuff==1
   
   else if(dropd==1){
-    
-    float cx = mercX(clon);
-    float cy = mercY(clat);
-    String country;
-    
-    for (int i = 1; i < geo.length; i++) {
-      String[] data = geo[i].split(",");
-      country = data[0].toString();
-      //println("Country is", country);
-      float lat = float(data[1]);
-      float lon = float(data[2]);
-      float x = mercX(lon) - cx;
-      float y = mercY(lat) - cy;
-      // This addition fixes the case where the longitude is non-zero and
-      // points can go off the screen.
-      if(x < - width/2) {
-         x += width;
-      } else if(x > width / 2) {
-         x -= width;
-      }//end of else if
-        image(pin, x+710, y+255, 10,10);
-     }//end of for loop
+    show(geo);
   }//end of else if
   
   switch(radio) {
     //case(0):c=color(0,200);break;
-    case(0):float cx = mercX(clon);
-            float cy = mercY(clat);
-            String country;
-            
-            for (int i = 1; i < geo.length; i++) {
-              String[] data = geo[i].split(",");
-              country = data[0].toString();
-              float lat = float(data[1]);
-              float lon = float(data[2]);
-              float x = mercX(lon) - cx;
-              float y = mercY(lat) - cy;
-              // This addition fixes the case where the longitude is non-zero and
-              // points can go off the screen.
-              if(x < - width/2) {
-                 x += width;
-              } else if(x > width / 2) {
-                 x -= width;
-              }
-              ellipse( x+710, y+255, 3,3);
-             }//end of for loop
+    case(0):show(geo);
             break;
     case(1):c=color(255,0,0,200);break;
     case(2):c=color(0, 200, 140,200);break;
@@ -336,6 +259,62 @@ void draw() {
    }//end of if
    
 }//end of draw
+
+void show(String[] strar){
+  float cx = mercX(clon);
+  float cy = mercY(clat);
+  //float mag;
+  String[] strarray  = strar;
+  String country;
+  
+  //c = color(random(255),random(255),random(255),random(128,255));
+  for (int i = 1; i < strarray.length; i++) {
+    String[] data = strarray[i].split(",");
+    //console.log(data);
+    float lat = float(data[1]);
+    float lon = float(data[2]);
+    float x = mercX(lon) - cx;
+    float y = mercY(lat) - cy;
+    // This addition fixes the case where the longitude is non-zero and
+    // points can go off the screen.
+    if(x < - width/2) {
+      x += width;
+    } else if(x > width / 2) {
+      x -= width;
+    }
+    
+    
+    
+    if(shuff==1)
+    {
+      float mag = float(data[4]);
+      mag = pow(10, mag);
+      mag = sqrt(mag);
+      float magmax = sqrt(pow(10, 10));
+      float d = map(mag, 0, magmax, 0, 180);
+      stroke(255, 0, 255);
+      fill(255, 0, 255, 200);
+      //ellipse(x+510, y+260, d, d);
+      ellipse(x+710, y+255, d, d);
+    }//end of if shuff==1
+    
+    else if(dropd==1)
+    {
+      country = data[0].toString();
+      if(country.equals(dd))
+      {
+        image(pin, x+706, y+255, 10,10); //<>//
+        //println("dd is",dd);
+      }
+    }//end of else if dropd==1
+    
+    else if(radio<5)
+    {
+      ellipse( x+710, y+255, 3,3);
+    }//end of else if radio<5
+   }//end of for loop
+   
+}//end of show()
 
 
 /*
