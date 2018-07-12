@@ -12,7 +12,7 @@ PImage pin;
 String dd;
 int shuff=0;
 int dropd =0;
-int radio=5;
+int radio=6;
 int clat = 0;
 int clon = 0;
 float gx;
@@ -98,9 +98,10 @@ void gui() {
      .addItem("Population", 1)
      .addItem("Surface Area", 2)
      .addItem("Avg Male Height", 3)
-     .addItem("grey", 4)
+     .addItem("Temperature",4)
+     .addItem("clear", 5)
      .setColorLabel(color(255))
-     .activate(4)
+     .activate(5)
      .moveTo(g2)
      ;
 
@@ -180,12 +181,12 @@ void radio(int theC) {
 void shuffle() {
   shuff =1;
   dropd=0;
-  radio=5;
+  radio=6;
 }
 
 void dropdown(int n) {
   shuff=0;
-  radio=5;
+  radio=6;
   dd= l.get(n).toString();
   dropd=1;
   /* request the selected item based on index n */
@@ -219,7 +220,7 @@ void draw() {
     show(earthquakes);
   }//end of if shuff==1
   
-  else if(dropd==1 || radio<5){
+  else if(dropd==1 || radio<6){
     show();
   }//end of else if
    
@@ -251,7 +252,7 @@ void show(){
         image(pin, x+706, y+255, 10,10); //<>//
       }
     }//end of else if dropd==1
-    else if(radio<5)
+    else if(radio<6)
     {
       switch(radio){
         case(0):c=color(0, 160, 100, 200);
@@ -259,22 +260,29 @@ void show(){
                 fill(c, 200);
                 ellipse( x+710, y+255, expectancy, expectancy);
                 break;
-        case(1):c=color(255,0,0,200);
+        case(1):c=color(245,215,94,200);
                 Float population = (aCountry.getPopulation()!=null?aCountry.getPopulation().floatValue():0)/6000000;
                 fill(c, 200);
                 ellipse( x+710, y+255, population, population);
                 break;
-        case(2):c=color(0, 200, 140,200);
+        case(2)://c=color(41, 59, 173,200);
+                c=color(230,83,41,200);
                 Float area = (aCountry.getArea()!=null?aCountry.getArea().floatValue():0)/60000;
                 fill(c, 200);
                 ellipse( x+710, y+255, area, area);
                 break;
         case(3):c=color(0, 128, 255,200);
-                Float height1 = (aCountry.getHeight()!=null?aCountry.getHeight().floatValue():0)/2;
+                Float height1 = (aCountry.getHeight()!=null?aCountry.getHeight().floatValue():0)/6;
                 fill(c, 200);
                 ellipse( x+710, y+255, height1, height1);
                 break;
-        case(4):c=color(50,128);break;
+        case(4)://c=color(50,128);
+                c=color(255,0,0,200);
+                Float temp = (aCountry.getTemperature()!=null?aCountry.getTemperature().floatValue():0)/2;
+                fill(c, 200);
+                ellipse( x+710, y+255, temp, temp);
+                break;     
+        case(5): c=color(50,128);break;
       }//end of switch case
     }//end of else if radio<5
    }//end of if x or y null 
