@@ -1,3 +1,6 @@
+// References: Mapbox and earthquake data vizualization inspired by Case & Ben's tutorial on "Mapping Earthquake Data"
+//Link: https://www.youtube.com/watch?v=ZiYdOwOrGyc
+// p5.js is used for the tutorial.
 import controlP5.*;
 import java.util.*;
 
